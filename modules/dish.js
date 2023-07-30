@@ -1,5 +1,3 @@
-const category = require("./category");
-
 const dishes = [{
     id: 1, 
     name: 'hambuger',
