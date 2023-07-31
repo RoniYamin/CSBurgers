@@ -3,11 +3,11 @@ const Categories = [{
     name: 'Starters'
 }];
 
-let counter = Categories.length; // an 
+let counter = Categories.length; 
 
 // get all is the list function
 const getAll = () => {
-    return Catrgories;
+    return Categories;
 }
 
 // this function gets an object and turn it into an object in the array
