@@ -1,55 +1,83 @@
-var express = require('express'); // Loads express
-const categoryModule = require('../modules/category'); // Loads the module
-var router = express.Router(); // concting the file to express
+const Categories = [{
+    id: 1,
+    name: 'Starters'
+}];
 
-/* GET Categories listing. */
-router.get('/', function(req, res, next) {
-    let Categories;
-    const id = req.query.id; // takes the value from a query
-    const name = req.query.name; // takes the value from a query
+let counter = Categories.length; 
 
-    if (id || name) {
-        Categories = categoryModule.search(id, name); // if there was a query
-    } else {
-        Categories = categoryModule.getAll(); // returning the array
+// get all is the list function
+const getAll = () => {
+    return Categories;
+}
+
+// this function gets an object and turn it into an object in the array
+const createCatrgory = (Catrgory) => {
+    counter++;
+    Categories.push({id: counter, name: `${Catrgory.name}`});
+    return counter;
+};
+
+// this function get an object with the id of the object we want to delete. we find the object and delete it.
+const deleteCatrgory = (CatrgoryId) => {
+    // remove the meal with the id
+    const parsedId = parseInt(CatrgoryId); // takes the string value and turn it to an int value
+    
+    // find the object and delete it
+    for (let i = 0; i < Categories.length; i++)
+    {
+        if(Categories[i]['id'] === parsedId)
+        {
+            Categories.splice(i, 1);
+            return;
+        }
+    }
+}
+
+// this function get an object with the id of the object we want to update. we find the object and update it.
+const updateCatrgory = (Catrgory) => {
+    // search meal by Id and replace it with the provided meal
+    const parsedId = parseInt(Catrgory.id); // takes the string value and turn it to an int value
+    
+    // find the object and update it 
+    for (let i = 0; i < Categories.length; i++)
+    {
+        if(Categories[i]['id'] === parsedId)
+        {
+            Categories[i]['name'] = Catrgory.name;
+            return;
+        }
+    }
+}
+
+// this function get the elements from the query and find and return all the objects that meets the terms
+const searchCatrgories = (id, name) => {
+    const parsedId = parseInt(id);
+
+    // filter is a lop that get an object and term and return all of the objects that return true on the term
+
+    if(id && !name) {
+        return Categories.filter((category) => {
+            return category.id === parsedId;
+        });
     }
 
-    res.end(JSON.stringify(categories)); // printing the array
-});
-
-/* POST - create category */
-router.post('/', function(req, res, next) {
-    // gets a json object and takes the value of the name from it
-    const category = { 
-        name:  req.body.name
-    }
-   
-    const id = categoryModule.create(category); // creating the object in the array
-
-    res.end(JSON.stringify(id));
-});
-
-/*PUT - update category*/
-router.put('/', function(req, res, next) {
-    // gets a json object and takes the value of the id and the name from it
-    const category = {
-        id: req.body.id,
-        name: req.body.name
+    else if (name && !id) {
+        return Categories.filter((category) => {
+            return category.name === name;
+        });
     }
 
-    categoryModule.update(category); // updating the object with the same id
+    else {
+        return Categories.filter((category) => {
+            return category.id === parsedId || category.name === name;
+        });
+    }
+}
 
-    res.end();
-});
-
-/*DELETE - delete category*/
-router.delete('/', function(req, res, next) {
-    // gets a json object and takes the value of id from it
-    const id = req.body.id;
-
-    categoryModule.delete(id); // deleting the object with the same id
-
-    res.end();
-});
-
-module.exports = router;
+module.exports = {
+    getAll,
+    create: createCatrgory,
+    delete: deleteCatrgory,
+    update: updateCatrgory,
+    search: searchCatrgories
+}
