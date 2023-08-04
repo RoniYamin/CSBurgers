@@ -104,7 +104,7 @@ const updateCategory = async (req,res) => {
         name: req.body.name
     }
 
-    const category = await articleService.update(newCatrgory);
+    const category = await CatrgoryService.update(newCatrgory);
     if (!category) {
         return res.status(404).json({errors:['Article not found']});
     }
@@ -123,8 +123,8 @@ const deleteCategory = async (req,res) => {
     res.send();
 }
 
-const sreachCategory = async (req,res) => {
-    const category = await articleService.search(req.params.id);
+const searchCategory = async (req,res) => {
+    const category = await CatrgoryService.search(req.params.id);
     
     if (!category) {
       return res.status(404).json({errors:['Category not found']});
@@ -138,5 +138,5 @@ module.exports = {
     createCategory,
     updateCategory,
     deleteCategory,
-    sreachCategory
+    searchCategory
 }

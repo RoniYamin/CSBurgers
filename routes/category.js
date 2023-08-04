@@ -7,7 +7,7 @@ router.route('/')
     .post(categoryController.createCategory)
 
 router.route('/:id')
-    .get(categoryController.sreachCategory)
+    .get(categoryController.searchCategory)
     .put(categoryController.updateCategory)
     .delete(categoryController.deleteCategory)
 

@@ -85,7 +85,7 @@ module.exports = {
 const Category = require('../models/category');
 
 const getAll = async() => {
-    return await Article.find({});
+    return await Category.find({});
 }
 
 const createCatrgory = async (name) => {
@@ -97,7 +97,7 @@ const createCatrgory = async (name) => {
 }
 
 const searchCatrgory = async(id) => {
-    return await Article.findById(id);
+    return await Category.findById(id);
 }
 
 const deleteCatrgory = async (id) => {
