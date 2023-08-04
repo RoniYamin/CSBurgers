@@ -1,14 +1,15 @@
 var express = require('express'); // Loads express
-const categoryModule = require('../controllers/category'); // Loads the module
+const categoryController = require('../controllers/category'); // Loads the module
 var router = express.Router(); // concting the file to express
 
 router.route('/')
-    .get(categoryModule.getAllCategories)
-    .post(categoryModule.createCategory)
+    .get(categoryController.getAllCategories)
+    .post(categoryController.createCategory)
 
 router.route('/:id')
-    .put(categoryModule.updateCategory)
-    .delete(categoryModule.deleteCategory)
+    .get(categoryController.sreachCategory)
+    .put(categoryController.updateCategory)
+    .delete(categoryController.deleteCategory)
 
 module.exports = router;
 
