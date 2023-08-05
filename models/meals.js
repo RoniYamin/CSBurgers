@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const DishSchema = new mongoose.Schema({
+const MealSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -11,12 +11,12 @@ const DishSchema = new mongoose.Schema({
         required: true
     },
 
-    CategoryId: {
-        type: mongoose.Schema.Types.ObjectId,
+    dishesId: {
+        type: Array,
         required: true
     }
 });
 
-const Dish = mongoose.model("dishes", DishSchema);
+const Meal = mongoose.model("meals", MealSchema);
 
-module.exports = Dish;
+module.exports = Meal;
