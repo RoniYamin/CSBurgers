@@ -1,151 +1,68 @@
-const dishes = [{
-    id: 1, 
-    name: 'hambuger',
-    price: '50$',
-    categoryId: 3
-}];
+const DishService = require('../services/dish');
 
-let counter = dishes.length;
-
-const getAll = () => {
-    return dishes;
+const getAllDishes = async (req,res) => {
+    const dishes = await DishService.getAll();
+    res.json(dishes);
 }
 
-const createDish = (dish) => {
-    counter++;
-    dishes.push({id: counter, name: `${dish.name}`, price: `${dish.price}`, categoryId: dish.categoryId});
-    return counter;
+const createDish = async (req,res) => {
+    const newDish = await DishService.create(req.body.name, req.body.price, req.body.CategoryId);
+    res.json(newDish);
+}
+
+const updateDish = async (req,res) => {
+    if (!req.body.name) {
+        res.status(400).json({message:'The new name to the dish is required'});
+    }
+
+    if (!req.body.price) {
+        res.status(400).json({message:'The new price to the dish is required'});
+    }
+
+    if (!req.body.CategoryId) {
+        res.status(400).json({message:'The new CategoryId to the dish is required'});
+    }
+
+    const newDish = {
+        id: req.body.id,
+        name: req.body.name,
+        price: req.body.price,
+        CategoryId: req.body.CategoryId
+    }
+
+    const dish = await DishService.update(newDish);
+    if (!dish) {
+        return res.status(404).json({errors:['Dish not found']});
+    }
+
+    res.json(dish);
 };
 
-const deleteDish = (dishId) => {
-    // remove the meal with the id
-    const parsedId = parseInt(dishId);
 
-    for (let i = 0; i < dishes.length; i++)
-    {
-        if(dishes[i]['id'] === parsedId)
-        {
-            dishes.splice(i, 1);
-            return;
-        }
+const deleteDish = async (req,res) => {
+    const dish = await DishService.delete(req.params.id);
+    
+    if (!dish) {
+        return res.status(404).json({errors:['Dish not found']});
     }
+
+    res.send();
 }
 
-const updateDish = (dish) => {
-    // search meal by Id and replace it with the provided meal
-    const parsedId = parseInt(dish.id);
-
-    for (let i = 0; i < dishes.length; i++)
-    {
-        if(dishes[i]['id'] === parsedId)
-        {
-            dishes[i]['name'] = dish.name;
-            dishes[i]['price'] = dish.price;
-            dishes[i]['categoryId'] = dish.categoryId;
-            return;
-        }
-    }
-}
-
-const searchDishes = (id, name, price, categoryId) => {
-    const parsedId = parseInt(id);
-    const paresCategoryId = parsedInt(categoryId);
-
-    if(id && !name && !price && !categoryId) {
-        return Catrgories.filter((dish) => {
-            return dish.id === parsedId;
-        });
+const searchDish = async (req,res) => {
+    const dish = await DishService.search(req.params.id);
+    
+    if (!dish) {
+      return res.status(404).json({errors:['Dish not found']});
     }
 
-    else if (name && !id && !price && !categoryId) {
-        return Catrgories.filter((dish) => {
-            return dish.name === name;
-        });
-    }
-
-    else if (price && !id && !name && !categoryId) {
-        return Catrgories.filter((dish) => {
-            return dish.price === price;
-        });
-    }
-
-    else if (categoryId && !id && !name && !price) {
-        return Catrgories.filter((dish) => {
-            return dish.categoryId === paresCategoryId;
-        });
-    }
-
-    else if (id && name && !price && !categoryId) {
-        return Catrgories.filter((dish) => {
-            return dish.id === parsedId || dish.name === name;
-        });
-    }
-
-    else if (id && price && !name && !categoryId) {
-        return Catrgories.filter((dish) => {
-            return dish.id === parsedId || dish.price === price;
-        });
-    }
-
-    else if (id && categoryId && !name && !price) {
-        return Catrgories.filter((dish) => {
-            return dish.id === parsedId || dish.categoryId === paresCategoryId;
-        });
-    }
-
-    else if (name && price && !id && !categoryId) {
-        return Catrgories.filter((dish) => {
-            return dish.name === name || dish.price === price;
-        });
-    }
-
-    else if (name && categoryId && !id && !price) {
-        return Catrgories.filter((dish) => {
-            return dish.name === name || dish.categoryId === paresCategoryId;
-        });
-    }
-
-    else if (price && categoryId && !id && !name) {
-        return Catrgories.filter((dish) => {
-            return dish.price === price || dish.categoryId === paresCategoryId;
-        });
-    }
-
-    else if (id && name && !price && !categoryId) {
-        return Catrgories.filter((dish) => {
-            return dish.id === parsedId || dish.name === name;
-        });
-    }
-
-    else if (id && name && price && !categoryId) {
-        return Catrgories.filter((dish) => {
-            return dish.id === parsedId || dish.name === name || dish.price === price;
-        });
-    }
-
-    else if (id && name && categoryId && !price) {
-        return Catrgories.filter((dish) => {
-            return dish.id === parsedId || dish.name === name || dish.categoryId === paresCategoryId;
-        });
-    }
-
-    else if (id && price && categoryId && !name) {
-        return Catrgories.filter((dish) => {
-            return dish.id === parsedId || dish.price === price || dish.categoryId === paresCategoryId;
-        });
-    }
-
-    else {
-        return Catrgories.filter((dish) => {
-            return dish.id === parsedId || dish.name === name || dish.price === price || dish.categoryId;
-        });
-    }
+    res.json(dish);
 }
 
 module.exports = {
-    getAll,
-    create: createDish,
-    delete: deleteDish,
-    update: updateDish,
-    search: searchDishes
+    getAllDishes,
+    createDish,
+    updateDish,
+    deleteDish,
+    searchDish
 }
