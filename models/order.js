@@ -12,11 +12,6 @@ const OrderSchema = new mongoose.Schema({
         required: true
     },
 
-    customerId: {
-        type: Number,
-        required: true
-    },
-
     location: {
         type: String,
         required: true
@@ -35,6 +30,10 @@ const OrderSchema = new mongoose.Schema({
     dishes: {
         type: Array,
         required: true
+    },
+
+    customerId: {
+        type: mongoose.Schema.Types.ObjectId,
     }
 });
 
