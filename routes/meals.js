@@ -1,10 +1,10 @@
 var express = require('express'); // Loads express
-const mealController = require('../controllers/meal'); // Loads the module
+const mealController = require('../controllers/meals'); // Loads the module
 var router = express.Router(); // concting the file to express
 
 router.route('/')
     .get(mealController.getAllMeals)
-    .post(mealController.creatMeal)
+    .post(mealController.createMeal)
 
 router.route('/:id')
     .get(mealController.searchMeal)

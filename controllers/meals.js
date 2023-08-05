@@ -1,4 +1,4 @@
-const MealService = require('../services/meal');
+const MealService = require('../services/meals');
 
 const getAllMeals = async (req,res) => {
     const meals = await MealService.getAll();
