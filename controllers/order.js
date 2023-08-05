@@ -95,5 +95,5 @@ module.exports = {
     creatOrder,
     updateOrder,
     deleteOrder,
-    searchOrder,
+    searchOrder
 }

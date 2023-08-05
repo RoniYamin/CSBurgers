@@ -64,5 +64,5 @@ module.exports = {
     createMeal,
     updateMeal,
     deleteMeal,
-    searchMeal,
+    searchMeal
 }
