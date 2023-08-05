@@ -5,10 +5,13 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
 
-var indexRouter = require('./controllers/index');
-var usersRouter = require('./controllers/users');
-var categoryController = require('./controllers/category');
-var dishController = require('./controllers/dish');
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+var categoryRouter = require('./routes/category');
+var dishRouter = require('./routes/dish');
+var mealsRouter = require('./routes/meals');
+var orderRouter = require('./routes/order');
+var userRouter = require('./routes/user');
 
 var app = express();
 
@@ -24,8 +27,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/api/category', categoryController);
-app.use('/api/dish', dishController);
+app.use('/api/category', categoryRouter);
+app.use('/api/dish', dishRouter);
+app.use('/api/meal', mealsRouter);
+app.use('/api/order', orderRouter);
+app.use('/api/user', userRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
