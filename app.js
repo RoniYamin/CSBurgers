@@ -15,6 +15,24 @@ var userRouter = require('./routes/user');
 
 var app = express();
 
+const connectMongoDB = async () => {
+  try {
+    await mongoose.connect("mongodb://127.0.0.1:27017/CSBurgers");
+    console.log("db is connected");
+
+    const db = mongoose.connection;
+    db.on("error", console.error.bind(console, "connection error: "));
+    db.once("open", function() {
+      console.log("Connected successfully");
+    });
+  }
+  catch (error) {
+    console.error("DB is not connected", error);
+  }
+}
+
+connectMongoDB();
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
