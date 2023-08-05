@@ -58,16 +58,16 @@ var router = express.Router();*/
 //module.exports = router;
 
 var express = require('express'); // Loads express
-const categoryController = require('../controllers/category'); // Loads the module
+const dishController = require('../controllers/dish'); // Loads the module
 var router = express.Router(); // concting the file to express
 
 router.route('/')
-    .get(categoryController.getAllDishes)
-    .post(categoryController.createDish)
+    .get(dishController.getAllDishes)
+    .post(dishController.createDish)
 
 router.route('/:id')
-    .get(categoryController.searchDish)
-    .put(categoryController.updateDish)
-    .delete(categoryController.deleteDish)
+    .get(dishController.searchDish)
+    .put(dishController.updateDish)
+    .delete(dishController.deleteDish)
 
 module.exports = router;
