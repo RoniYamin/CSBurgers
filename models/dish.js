@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 
-const Dish = new Schema({
+const DishSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -13,9 +12,11 @@ const Dish = new Schema({
     },
 
     CategoryId: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         required: true
     }
 });
 
-module.exports = mongoose.model('Dish', Dish);
+const Dish = mongoose.model("dishes", DishSchema);
+
+module.exports = Dish;
