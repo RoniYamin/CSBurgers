@@ -17,7 +17,7 @@ var app = express();
 
 const connectMongoDB = async () => {
   try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/CSBurgers");
+    await mongoose.connect("mongodb+srv://oronfink:wqcFA5QYzD4OCBpw@csburgers.aegfxkp.mongodb.net/?retryWrites=true&w=majority");
     console.log("db is connected");
 
     const db = mongoose.connection;
