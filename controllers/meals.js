@@ -1,13 +1,36 @@
 const MealService = require('../services/meals');
 
 const getAllMeals = async (req,res) => {
-    const meals = await MealService.getAll();
-    res.json(meals);
+    try {
+        const meals = await MealService.getAll();
+
+        if(!meals) {
+            throw new Error('Non existing meals');
+        }
+
+        res.json(meals);
+    }
+
+    catch (error) {
+        res.status(400).json({
+            error: "Getting all the meals - Error",
+            message: error.message
+        });
+    }
 }
 
 const createMeal = async (req,res) => {
-    const newMeal = await MealService.create(req.body.name, req.body.price, req.body.dishes);
-    res.json(newMeal);
+    try {
+        const newMeal = await MealService.create(req.body.name, req.body.price, req.body.dishes);
+        res.json(newMeal);
+    }
+    
+    catch (error) {
+        res.status(400).json({
+            error: "Creating new meal - Error",
+            message: error.message
+        });
+    }
 }
 
 const updateMeal = async (req,res) => {
