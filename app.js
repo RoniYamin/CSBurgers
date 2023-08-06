@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -17,7 +18,7 @@ var app = express();
 
 const connectMongoDB = async () => {
   try {
-    await mongoose.connect("mongodb+srv://oronfink:wqcFA5QYzD4OCBpw@csburgers.aegfxkp.mongodb.net/?retryWrites=true&w=majority");
+    await mongoose.connect(process.env.MONGODB_URI);
     console.log("db is connected");
 
     const db = mongoose.connection;
