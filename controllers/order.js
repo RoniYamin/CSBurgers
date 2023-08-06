@@ -1,26 +1,49 @@
 const OrderService = require('../services/order');
 
 const getAllOrders = async (req,res) => {
-    const orders = await OrderService.getAll();
-    res.json(orders);
+    try {
+        const orders = await OrderService.getAll();
+        
+        if(!orders) {
+            throw new Error('Non existing orders');
+        }
+        
+        res.json(orders);
+    }
+
+    catch (error) {
+        res.status(400).json({
+            error: "Getting all the orders - Error",
+            message: error.message
+        });
+    }
 }
 
 const creatOrder = async (req,res) => {
-    const tmp = {
-        orderNumber: req.body.orderNumber,
-        orderDate: req.body.orderDate,
-        location: req.body.location,
-        totalprice: req.body.totalprice,
-        meals: req.body.meals,
-        dishes: req.body.dishes
+    try {
+        const tmp = {
+            orderNumber: req.body.orderNumber,
+            orderDate: req.body.orderDate,
+            location: req.body.location,
+            totalprice: req.body.totalprice,
+            meals: req.body.meals,
+            dishes: req.body.dishes
+        }
+    
+        if (req.body.customerId) {
+            tmp.customerId = req.body.customerId;
+        }
+    
+        const newOrder = await OrderService.create(tmp);
+        res.json(newOrder);
     }
 
-    if (req.body.customerId) {
-        tmp.customerId = req.body.customerId;
+    catch (error) {
+        res.status(400).json({
+            error: "Creating new order - Error",
+            message: error.message
+        });
     }
-
-    const newOrder = await OrderService.create(tmp);
-    res.json(newOrder);
 }
 
 const updateOrder = async (req,res) => {
