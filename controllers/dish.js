@@ -1,13 +1,36 @@
 const DishService = require('../services/dish');
 
 const getAllDishes = async (req,res) => {
-    const dishes = await DishService.getAll();
-    res.json(dishes);
+    try {
+        const dishes = await DishService.getAll();
+
+        if(!dishes) {
+            throw new Error('Non existing dishes');
+        }
+
+        res.json(dishes);
+    }
+    
+    catch (error) {
+        res.status(400).json({
+            error: "Getting all the dishes - Error",
+            message: error.message
+        });
+    }
 }
 
 const createDish = async (req,res) => {
-    const newDish = await DishService.create(req.body.name, req.body.price, req.body.CategoryId);
-    res.json(newDish);
+    try {
+        const newDish = await DishService.create(req.body.name, req.body.price, req.body.CategoryId);
+        res.json(newDish);
+    }
+    
+    catch (error) {
+        res.status(400).json({
+            error: "Creating new dish - Error",
+            message: error.message
+        });
+    }
 }
 
 const updateDish = async (req,res) => {
