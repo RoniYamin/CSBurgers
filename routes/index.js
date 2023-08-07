@@ -4,9 +4,15 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  //res.render('index', { title: 'Express' });
+  res.render("homePage");
+});
 
-  res.sendFile(path.join(__dirname, '../public', '/HomePage.html'));
+router.get('/branches', function(req, res, next) {  
+  res.render("branches");
+});
+
+router.get('/menu', function(req, res, next) {
+  res.render("menuPage");
 });
 
 module.exports = router;

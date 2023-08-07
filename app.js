@@ -13,6 +13,7 @@ var dishRouter = require('./routes/dish');
 var mealsRouter = require('./routes/meals');
 var orderRouter = require('./routes/order');
 var userRouter = require('./routes/user');
+var branchRouter = require('./routes/branches');
 
 var app = express();
 
@@ -48,11 +49,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/api/category', categoryRouter);
-app.use('/api/dish', dishRouter);
-app.use('/api/meal', mealsRouter);
-app.use('/api/order', orderRouter);
-app.use('/api/user', userRouter);
+app.use('/category', categoryRouter);
+app.use('/dish', dishRouter);
+app.use('/meal', mealsRouter);
+app.use('/order', orderRouter);
+app.use('/user', userRouter);
+app.use('/branches', branchRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
