@@ -1,13 +1,36 @@
 const CatrgoryService = require('../services/category');
 
 const getAllCategories = async (req,res) => {
-    const Catrgories = await CatrgoryService.getAll();
-    res.json(Catrgories);
+    try {
+        const Catrgories = await CatrgoryService.getAll();
+
+        if(!Catrgories) {
+            throw new Error('Non existing categories');
+        }
+
+        res.json(Catrgories);
+    }
+
+    catch (error) {
+        res.status(400).json({
+            error: "Getting all the categories - Error",
+            message: error.message
+        });
+    }
 }
 
 const createCategory = async (req,res) => {
-    const newCatrgory = await CatrgoryService.create(req.body.name);
-    res.json(newCatrgory);
+    try {
+        const newCatrgory = await CatrgoryService.create(req.body.name);
+        res.json(newCatrgory);
+    }
+
+    catch (error) {
+        res.status(400).json({
+            error: "Creating new category - Error",
+            message: error.message
+        });
+    }
 }
 
 const updateCategory = async (req,res) => {
@@ -22,10 +45,10 @@ const updateCategory = async (req,res) => {
 
     const category = await CatrgoryService.update(newCatrgory);
     if (!category) {
-        return res.status(404).json({errors:['Article not found']});
+        return res.status(404).json({errors:['Category not found']});
     }
 
-    res.json(article);
+    res.json(category);
 };
 
 

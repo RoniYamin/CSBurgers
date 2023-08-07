@@ -64,5 +64,5 @@ module.exports = {
     create: createOrder,
     delete: deleteOrder,
     update: updateOrder,
-    search: searchOrder,
+    search: searchOrder
 }
