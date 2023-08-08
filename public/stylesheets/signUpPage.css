@@ -3,3 +3,8 @@
     font-family: 'Lato', sans-serif;
     font-family: 'Noto Sans Hebrew', sans-serif;
 }
+
+.form-control
+{
+    text-align: right;
+}
