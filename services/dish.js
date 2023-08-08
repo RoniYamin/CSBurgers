@@ -4,7 +4,7 @@ const getAll = async() => {
     return await Dish.find({});
 }
 
-const createDish = async (name, price, CategoryId,picture) => {
+const createDish = async (name, price, CategoryId, picture) => {
     const dish = new Dish({
         name: name,
         price: price,

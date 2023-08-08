@@ -21,7 +21,7 @@ const getAllMeals = async (req,res) => {
 
 const createMeal = async (req,res) => {
     try {
-        const newMeal = await MealService.create(req.body.name, req.body.price, req.body.dishes,req.body.picture);
+        const newMeal = await MealService.create(req.body.name, req.body.price, req.body.dishes, req.body.picture);
         res.json(newMeal);
     }
     
@@ -54,7 +54,7 @@ const updateMeal = async (req,res) => {
         name: req.body.name,
         price: req.body.price,
         dishes: req.body.dishes,
-        picture: req.body.picture,
+        picture: req.body.picture
     }
 
     const meal = await MealService.update(newMeal);
