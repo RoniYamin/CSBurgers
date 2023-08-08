@@ -25,6 +25,12 @@
         
     </body>
     <script>
-        
+        function phoneNumberFormatter()
+        {
+            const phoneNumberField = document.getElementById("phone-number");
+            const formattedInputVal = formatPhoneNumber(phoneNumberField.value);
+            phoneNumberField.value = formattedInputVal;
+    
+        }
     </script>
 </html>
