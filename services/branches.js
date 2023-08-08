@@ -11,6 +11,8 @@ const createBranch = async (newBranch) => {
         phoneNumber: newBranch.phoneNumber,
         activityTime: newBranch.activityTime,
         manger: newBranch.manger,
+        coordinateX: newBranch.coordinateX,
+        coordinateY: newBranch.coordinateY
     });
 
     return await branch.save();
@@ -44,6 +46,8 @@ const updateBranch = async (newBranch) => {
     branch.phoneNumber = newBranch.phoneNumber;
     branch.activityTime = newBranch.activityTime;
     branch.manger = newBranch.manger;
+    branch.coordinateX = newBranch.coordinateX;
+    branch.coordinateY = newBranch.coordinateY;
 
     await branch.save()
     return branch;
