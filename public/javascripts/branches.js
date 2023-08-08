@@ -15,7 +15,7 @@ $(document).ready(function() {
                     </div>
 
                     <div class="plus-icon" data-branch-id="${branch._id}">
-                        <i class="bi bi-plus-circle-fill"></i>
+                        <i class="bi bi-plus-circle-fill" id="iconToClick"></i>
                     </div>
                 </div>
             </li>`);
@@ -24,20 +24,27 @@ $(document).ready(function() {
         $('.plus-icon').on('click', function() {
             const btn = $(this);
             const id = btn.attr('data-branch-id');
-            $.ajax({
-                url: `/api/branches/${id}`,
-                method: "GET"
-            }).done(function(data) {
-                const li = $(`.${id}`);
-                li.append(`<div class="location-data">
-                    <span class="data">כתובת: ${data.address}</span>
-                    <span class="data">משלוחים: כן</span>
-                    <span class="data">${data.phoneNumber} :טלפון</span>
-                    <span class="data">שעות פתיחה: ${data.activityTime}</span>
-                </div>`);
-            })
+
+            if($('#iconToClick').hasClass('bi bi-plus-circle-fill')) {
+                $.ajax({
+                    url: `/api/branches/${id}`,
+                    method: "GET"
+                }).done(function(data) {
+                    const li = $(`.${id}`);
+                    li.append(`<div class="location-data">
+                        <span class="data">כתובת: ${data.address}</span>
+                        <span class="data">משלוחים: כן</span>
+                        <span class="data">${data.phoneNumber} :טלפון</span>
+                        <span class="data">שעות פתיחה: ${data.activityTime}</span>
+                    </div>`);
+    
+                    $('#iconToClick').removeClass("bi bi-plus-circle-fill").addClass("bi bi-dash-circle-fill");
+                });
+            }
+            else {
+                $('.location-data').remove();
+                $('#iconToClick').removeClass("bi bi-dash-circle-fill").addClass("bi bi-plus-circle-fill");
+            }
         });
     }); 
-
-   
 });
