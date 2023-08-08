@@ -14,6 +14,10 @@ const MealSchema = new mongoose.Schema({
     dishesId: {
         type: Array,
         required: true
+    },
+    picture:{
+        type: String,
+        required: true
     }
 });
 
