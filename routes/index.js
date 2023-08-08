@@ -15,4 +15,8 @@ router.get('/menu', function(req, res, next) {
   res.render("menuPage");
 });
 
+router.get('/signUp', function(req, res, next) {
+  res.render("signUp");
+});
+
 module.exports = router;
