@@ -25,11 +25,13 @@ const BranchesSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
+
     coordinateX:
     {
         type:Number,
         required: true
     },
+    
     coordinateY:
     {
         type:Number,
