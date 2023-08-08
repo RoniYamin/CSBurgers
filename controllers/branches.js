@@ -26,7 +26,9 @@ const createBranch = async (req,res) => {
             address: req.body.address,
             phoneNumber: req.body.phoneNumber,
             activityTime: req.body.activityTime,
-            manger: req.body.manger
+            manger: req.body.manger,
+            coordinateX: req.body.coordinateX,
+            coordinateY: req.body,coordinateY,
         }
 
         const newBranch = await branchesService.create(tmp);
@@ -61,6 +63,14 @@ const updateBranch = async (req,res) => {
     if (!req.body.manger) {
         res.status(400).json({message:'The new manger to the branch is required'});
     }
+    
+    if (!req.body.coordinateX) {
+        res.status(400).json({message:'The new coordinateX to the branch is required'});
+    }
+    
+    if (!req.body.coordinateY) {
+        res.status(400).json({message:'The new coordinateY to the branch is required'});
+    }
 
     const newBranch = {
         id: req.body.id,
@@ -68,7 +78,9 @@ const updateBranch = async (req,res) => {
         address: req.body.address,
         phoneNumber: req.body.phoneNumber,
         activityTime: req.body.activityTime,
-        manger: req.body.manger
+        manger: req.body.manger,
+        coordinateX: req.body.coordinateX,
+        coordinateY: req.body.coordinateY,
     }
 
     const branch = await branchesService.update(newBranch);
