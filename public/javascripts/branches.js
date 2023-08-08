@@ -15,7 +15,7 @@ $(document).ready(function() {
                     </div>
 
                     <div class="plus-icon" data-branch-id="${branch._id}">
-                        <i class="bi bi-plus-circle-fill" id="iconToClick"></i>
+                        <i class="bi bi-plus-circle-fill" id="iconToClick-${branch._id}"></i>
                     </div>
                 </div>
             </li>`);
@@ -24,26 +24,27 @@ $(document).ready(function() {
         $('.plus-icon').on('click', function() {
             const btn = $(this);
             const id = btn.attr('data-branch-id');
+            const icon = $(`#iconToClick-${id}`);
 
-            if($('#iconToClick').hasClass('bi bi-plus-circle-fill')) {
+            if(icon.hasClass('bi bi-plus-circle-fill')) {
                 $.ajax({
                     url: `/api/branches/${id}`,
                     method: "GET"
                 }).done(function(data) {
                     const li = $(`.${id}`);
-                    li.append(`<div class="location-data">
+                    li.append(`<div class="location-data" id="location-data-${id}">
                         <span class="data">כתובת: ${data.address}</span>
                         <span class="data">משלוחים: כן</span>
                         <span class="data">${data.phoneNumber} :טלפון</span>
                         <span class="data">שעות פתיחה: ${data.activityTime}</span>
                     </div>`);
     
-                    $('#iconToClick').removeClass("bi bi-plus-circle-fill").addClass("bi bi-dash-circle-fill");
+                   icon.removeClass("bi bi-plus-circle-fill").addClass("bi bi-dash-circle-fill");
                 });
             }
             else {
-                $('.location-data').remove();
-                $('#iconToClick').removeClass("bi bi-dash-circle-fill").addClass("bi bi-plus-circle-fill");
+                $(`#location-data-${id}`).remove();
+                icon.removeClass("bi bi-dash-circle-fill").addClass("bi bi-plus-circle-fill");
             }
         });
     }); 
