@@ -3,7 +3,6 @@ $(document).ready(function() {
     const approve = $('#approveBtn');
 
     approve.on('click', function() {
-
         const fnameTxt = $('#form3Example1n');
         const lnameTxt = $('#form3Example1m');
         const phoneNumberTxt = $('#phone-number');
@@ -16,7 +15,7 @@ $(document).ready(function() {
         const passwordVal = passwordTxt.val();
         const passwordApproveVal = passwordApproveTxt.val();
 
-        if (fnameVal.length >= 12) {
+        if (fnameVal.length <= 12) {
             for (let i = 0; i< fnameVal; i++) {
                 if (fnameVal[i] > 'z' || fnameVal[i] < 'A') {
                     return;
@@ -26,7 +25,7 @@ $(document).ready(function() {
             return;
         }
 
-        if (lnameVal.length >= 12) {
+        if (lnameVal.length <= 12) {
             for (let i = 0; i< lnameVal; i++) {
                 if (lnameVal[i] > 'z' || lnameVal[i] < 'A') {
                     return;
@@ -36,11 +35,11 @@ $(document).ready(function() {
             return;
         }
 
-        if (phoneNumberVal.length != 9) {
+        if (phoneNumberVal.length != 13 && phoneNumberVal.length != 14) {
             return;
         }
 
-        if (passwordVal.length < 8) {
+        if (passwordVal.length > 8) {
             let counter = 0;
 
             for (let i = 0; i < passwordVal.length; i++) {
@@ -52,6 +51,8 @@ $(document).ready(function() {
             if (counter === 0) {
                 return;
             }
+        } else {
+            return;
         }
 
         if (passwordApproveVal !== passwordVal) {
