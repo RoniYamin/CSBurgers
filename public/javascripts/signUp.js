@@ -41,7 +41,17 @@ $(document).ready(function() {
         }
 
         if (passwordVal.length < 8) {
-            return;
+            let counter = 0;
+
+            for (let i = 0; i < passwordVal.length; i++) {
+                if (passwordVal[i] <= 'z' && passwordVal[i] >= 'A') {
+                    counter++;
+                }
+            }
+
+            if (counter === 0) {
+                return;
+            }
         }
 
         if (passwordApproveVal !== passwordVal) {
