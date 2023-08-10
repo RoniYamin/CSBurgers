@@ -21,6 +21,6 @@ router.get('/signUp', function(req, res, next) {
 
 router.get('/delivery', function(req, res, next) {
   res.render("delivery");
-})
+});
 
 module.exports = router;
