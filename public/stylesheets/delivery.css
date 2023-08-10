@@ -1,0 +1,27 @@
+.wahtDelivery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    font-size: 4vw;
+}
+
+.btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#deliveryTo {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+
+#deliveryFrom {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
