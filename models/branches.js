@@ -37,7 +37,7 @@ const BranchesSchema = new mongoose.Schema({
     {
         type: Double,
         required: true
-    },
+    }
 });
 
 const Branches = mongoose.model('branches', BranchesSchema);

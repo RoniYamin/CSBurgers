@@ -1,12 +1,26 @@
 var express = require('express');
-const path = require('path');
+//const path = require('path');
 var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  //res.render('index', { title: 'Express' });
+  res.render("homePage");
+});
 
-  res.sendFile(path.join(__dirname, '../public', '/HomePage.html'));
+router.get('/branches', function(req, res, next) {  
+  res.render("branches");
+});
+
+router.get('/menu', function(req, res, next) {
+  res.render("menuPage");
+});
+
+router.get('/signUp', function(req, res, next) {
+  res.render("signUp");
+});
+
+router.get('/aboutUs', function(req, res, next) {  
+  res.render("aboutUs");
 });
 
 module.exports = router;
