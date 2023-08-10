@@ -15,35 +15,40 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato&family=Noto+Sans+Hebrew:wght@500;900&display=swap" rel="stylesheet">
 
-</head>
-<body>
-    <section class="vh-100 bg-image bg-repeat"
-    style="background-image: url('/images/pagesImgs/cs-burger-logo.PNG');">
-
     <style>
-        /* CSS to make the background image repeat */
-        .bg-repeat {
-            background-repeat: repeat;
-            background-size: auto;
+        /* CSS for adjusting layout */
+        .card {
+            display: flex;
+        }
+        .card-body {
+            flex: 1;
+        }
+        .video-container {
+            flex: 1;
+        }
+        .video-container video {
+            width: 100%;
+            height: auto;
         }
     </style>
-    
+</head>
+<body>
+    <section class="vh-100 bg-image"
+    style="background-image: url('./images/pagesImgs/CSBurgers.png');">
     <div class="mask d-flex align-items-center h-100 gradient-custom-3 register-container">
       <div class="container h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
               <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                   <div class="card" style="border-radius: 15px;">
                       <div class="card-body p-5">
-                              <h2 class="sign-up-title text-center">עלינו</h2>
-                              <div class="embed-responsive embed-responsive-16by9">
-                              <video controls class="embed-responsive-item">
-                                <source src="./images/burgerVideo/burger.mp4" type="video/mp4">
-                              </video>
-                              <!-- <div class="embed-responsive embed-responsive-16by9">
-                                <video class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></video>
-                              </div> -->
-                            </div>
-                        </div>
+                        <h2 class="text-center">עלינו</h2>
+                        <h10 class="text-center">המבורגר אנגוס, המבורגר אסאדו וכריך אנטריקוט הם רק חלק ממבחר הארוחות האטרקטיביות שלנו כשכל ארוחה כוללת תוספת ושתייה אישית לבחירה. לא מעוניינים בארוחה שלמה? אצלנו במסעדה תוכלו להזמין מוצרים בודדים וארוחות ילדים. עוד בתפריט תמצאו מבחר תוספות קריספיות וכמובן קינוחים מתוקים לסיום ארוחה משביעה וטעימה.</h10>
+                      </div>
+                      <div class="video-container">
+                        <video controls width="300">
+                            <source src="./images/burgerVideo/burger.mp4" type="video/mp4">
+                        </video>
+                    </div>
                   </div>
               </div>
           </div>
