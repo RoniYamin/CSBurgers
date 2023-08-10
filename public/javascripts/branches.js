@@ -1,10 +1,13 @@
 $(document).ready(function() {
+
+    let Branches = [];
+
     $.ajax({
         url:"/api/branches",
         method: "GET"
     }).done(function(data) {
-        data.forEach(function(branch) {
-            $('.branches-list').append(`<li class="${branch._id}">
+        Branches = data.map(branch => {
+            $('.branches-list').append(`<li id="${branch._id}">
                 <div class="location-Section"> 
                     <div class="location">
                         <div class="location-icon">
@@ -19,6 +22,7 @@ $(document).ready(function() {
                     </div>
                 </div>
             </li>`);
+            return {id: branch._id, name: branch.name, element: $(`#${branch._id}`)};
         });
 
         $('.plus-icon').on('click', function() {
@@ -31,7 +35,7 @@ $(document).ready(function() {
                     url: `/api/branches/${id}`,
                     method: "GET"
                 }).done(function(data) {
-                    const li = $(`.${id}`);
+                    const li = $(`#${id}`);
                     li.append(`<div class="location-data" id="location-data-${id}">
                         <span class="data">כתובת: ${data.address}</span>
                         <span class="data">משלוחים: כן</span>
@@ -46,6 +50,19 @@ $(document).ready(function() {
                 $(`#location-data-${id}`).remove();
                 icon.removeClass("bi bi-dash-circle-fill").addClass("bi bi-plus-circle-fill");
             }
+        });
+
+        const searchTxt = $('#searchTxt');
+
+        searchTxt.on('input', function() {
+            const value = searchTxt.val();
+    
+            Branches.forEach(branch => {
+                console.log(branch.name);
+
+                const isVisible = branch.name.includes(value);
+                branch.element.toggleClass("hide", !isVisible);
+            });
         });
     }); 
 });

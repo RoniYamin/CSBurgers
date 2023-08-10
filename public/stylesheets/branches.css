@@ -14,7 +14,7 @@
     margin: 1.5vw;
 }
 
-.searchBlock {
+.search-wrapper {
     display: flex;
     justify-content: center;
 
@@ -41,6 +41,10 @@
 li {
     display: flex;
     flex-direction: column;
+}
+
+.hide {
+    display: none;
 }
 
 .location-Section {
