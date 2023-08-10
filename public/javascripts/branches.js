@@ -53,7 +53,7 @@ $(document).ready(function() {
 
                     async function initMap() {
                         // The location of Uluru
-                        const position = { lat: 32.071450, lng: 34.787660 };
+                        const position = { lat: data.coordinateX, lng: data.coordinateY };
                         // Request needed libraries.
                         //@ts-ignore
                         const { Map } = await google.maps.importLibrary("maps");
