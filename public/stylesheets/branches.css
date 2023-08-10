@@ -14,7 +14,7 @@
     margin: 1.5vw;
 }
 
-.searchBlock {
+.search-wrapper {
     display: flex;
     justify-content: center;
 
@@ -43,6 +43,10 @@ li {
     flex-direction: column;
 }
 
+.hide {
+    display: none;
+}
+
 .location-Section {
     color: white;
     background-color: rgb(154, 13, 13);
@@ -57,7 +61,7 @@ li {
 
 .location-data {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     text-align: right;
     height: 12vw;
     justify-content: space-evenly;
