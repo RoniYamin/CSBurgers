@@ -61,7 +61,7 @@ li {
 
 .location-data {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     text-align: right;
     height: 12vw;
     justify-content: space-evenly;

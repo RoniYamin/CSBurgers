@@ -37,13 +37,13 @@ $(document).ready(function() {
                 }).done(function(data) {
                     const li = $(`#${id}`);
                     li.append(`<div class="location-data" id="location-data-${id}">
-                        <div class="branch-data">
-                            <span class="data">כתובת: ${data.address}</span>
-                            <span class="data">משלוחים: כן</span>
-                            <span class="data">${data.phoneNumber} :טלפון</span>
-                            <span class="data">שעות פתיחה: ${data.activityTime}</span>
+                        <div id="map-${id}" style="width: 50%"></div>
+                        <div class="branch-data" style="width: 50%">
+                            <div class="data">כתובת: ${data.address}</div>
+                            <div class="data">משלוחים: כן</div>
+                            <div class="data">${data.phoneNumber} :טלפון</div>
+                            <div class="data">שעות פתיחה: ${data.activityTime}</div>
                         </div>
-                        <div id="map"></div>
                     </div>`);
     
                     icon.removeClass("bi bi-plus-circle-fill").addClass("bi bi-dash-circle-fill");
@@ -53,24 +53,24 @@ $(document).ready(function() {
 
                     async function initMap() {
                         // The location of Uluru
-                        const position = { lat: -25.344, lng: 131.031 };
+                        const position = { lat: 32.071450, lng: 34.787660 };
                         // Request needed libraries.
                         //@ts-ignore
                         const { Map } = await google.maps.importLibrary("maps");
                         const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
                          // The map, centered at Uluru
-                        map = new Map($("#map"), {
-                            zoom: 4,
+                        map = new Map(document.getElementById(`map-${id}`), {
+                            zoom: 14,
                             center: position,
-                            mapId: "DEMO_MAP_ID",
+                            mapId: `CSBugerBranch-${id}`,
                         });
 
                         // The marker, positioned at Uluru
                         const marker = new AdvancedMarkerElement({
                             map: map,
                             position: position,
-                            title: "Uluru",
+                            title: data.name,
                         });
                     }
 
