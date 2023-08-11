@@ -11,8 +11,18 @@ const MealSchema = new mongoose.Schema({
         required: true
     },
 
-    dishesId: {
+    dishes: {
         type: Array,
+        required: true
+    },
+
+    CategoryId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    },
+
+    picture:{
+        type: String,
         required: true
     }
 });

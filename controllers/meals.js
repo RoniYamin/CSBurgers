@@ -21,7 +21,7 @@ const getAllMeals = async (req, res) => {
 
 const createMeal = async (req, res) => {
     try {
-        const newMeal = await MealService.create(req.body.name, req.body.price, req.body.dishes,req.body.picture);
+        const newMeal = await MealService.create(req.body.name, req.body.price, req.body.dishes, req.body.CategoryId, req.body.picture);
         res.json(newMeal);
     }
     
@@ -45,6 +45,11 @@ const updateMeal = async (req, res) => {
     if (!req.body.dishes) {
         res.status(400).json({message:'The new dishes to the meal is required'});
     }
+
+    if(!req.body.CategoryId) {
+        res.status(400).json({message:'The new CategoryId to the meal is required'});
+    }
+
     if (!req.body.dishes) {
         res.status(400).json({message:'The new picture to the meal is required'});
     }
@@ -54,6 +59,7 @@ const updateMeal = async (req, res) => {
         name: req.body.name,
         price: req.body.price,
         dishes: req.body.dishes,
+        CategoryId: req.body.CategoryId,
         picture: req.body.picture
     }
 
@@ -91,5 +97,5 @@ module.exports = {
     createMeal,
     updateMeal,
     deleteMeal,
-    searchMeal,
+    searchMeal
 }

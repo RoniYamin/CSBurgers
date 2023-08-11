@@ -21,7 +21,7 @@ const getAllDishes = async (req, res) => {
 
 const createDish = async (req, res) => {
     try {
-        const newDish = await DishService.create(req.body.name, req.body.price, req.body.CategoryId,req.body.picture);
+        const newDish = await DishService.create(req.body.name, req.body.price, req.body.CategoryId, req.body.picture);
         res.json(newDish);
     }
     

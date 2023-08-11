@@ -28,7 +28,7 @@ const createBranch = async (req, res) => {
             activityTime: req.body.activityTime,
             manger: req.body.manger,
             coordinateX: req.body.coordinateX,
-            coordinateY: req.body,coordinateY,
+            coordinateY: req.body.coordinateY
         }
 
         const newBranch = await branchesService.create(tmp);
@@ -80,7 +80,7 @@ const updateBranch = async (req, res) => {
         activityTime: req.body.activityTime,
         manger: req.body.manger,
         coordinateX: req.body.coordinateX,
-        coordinateY: req.body.coordinateY,
+        coordinateY: req.body.coordinateY
     }
 
     const branch = await branchesService.update(newBranch);
