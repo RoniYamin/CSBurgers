@@ -1,6 +1,6 @@
 const CatrgoryService = require('../services/category');
 
-const getAllCategories = async (req,res) => {
+const getAllCategories = async (req, res) => {
     try {
         const Catrgories = await CatrgoryService.getAll();
 
@@ -19,7 +19,7 @@ const getAllCategories = async (req,res) => {
     }
 }
 
-const createCategory = async (req,res) => {
+const createCategory = async (req, res) => {
     try {
         const newCatrgory = await CatrgoryService.create(req.body.name);
         res.json(newCatrgory);
@@ -33,13 +33,13 @@ const createCategory = async (req,res) => {
     }
 }
 
-const updateCategory = async (req,res) => {
+const updateCategory = async (req, res) => {
     if (!req.body.name) {
         res.status(400).json({message:'The new name to the category is required'});
     }
 
     const newCatrgory = {
-        id: req.body.id,
+        id: req.params.id,
         name: req.body.name
     }
 
@@ -52,7 +52,7 @@ const updateCategory = async (req,res) => {
 };
 
 
-const deleteCategory = async (req,res) => {
+const deleteCategory = async (req, res) => {
     const category = await CatrgoryService.delete(req.params.id);
     
     if (!category) {
@@ -62,7 +62,7 @@ const deleteCategory = async (req,res) => {
     res.send();
 }
 
-const searchCategory = async (req,res) => {
+const searchCategory = async (req, res) => {
     const category = await CatrgoryService.search(req.params.id);
     
     if (!category) {
