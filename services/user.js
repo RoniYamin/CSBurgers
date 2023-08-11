@@ -59,10 +59,27 @@ const updateUser = async (newUser) => {
     return user;
 }
 
+const searchInQuery = async (fname, lname, password) => {
+    if (!fname) {
+        return null;
+    }
+
+    if (!lname) {
+        return null;
+    }
+
+    if (!password) {
+        return null;
+    }
+
+    return await User.find({fname, lname, password});
+}
+
 module.exports = {
     getAll,
     create: createUser,
     delete: deleteUser,
     update: updateUser,
-    search: searchUser
+    search: searchUser,
+    searchInQuery
 }

@@ -1,8 +1,18 @@
 const UserService = require('../services/user');
 
-const getAllUsers = async (req,res) => {
+const getAllUsers = async (req, res) => {
     try {
-        const Users = await UserService.getAll();
+        let Users;
+
+        if (req.query.fname || req.query.lname || req.query.password){
+            if (!req.query.fname || !req.query.lname || !req.query.password) {
+                throw new Error('You have not entered all the details');
+            } else {
+                Users = await UserService.searchInQuery(req.query.fname, req.query.lname, req.query.password);
+            }
+        } else {
+            Users = await UserService.getAll();
+        }
         
         if(!Users) {
             throw new Error('Non existing users');
@@ -19,7 +29,7 @@ const getAllUsers = async (req,res) => {
     }
 }
 
-const createUser = async (req,res) => {
+const createUser = async (req, res) => {
     try {
         const tmp = {
             fname: req.body.fname,
@@ -46,7 +56,7 @@ const createUser = async (req,res) => {
     }
 }
 
-const updateUser = async (req,res) => {
+const updateUser = async (req, res) => {
     if (!req.body.fname) {
         res.status(400).json({message:'The new fname to the user is required'});
     }
@@ -93,7 +103,7 @@ const updateUser = async (req,res) => {
 };
 
 
-const deleteUser = async (req,res) => {
+const deleteUser = async (req, res) => {
     const user = await UserService.delete(req.params.id);
 
     if (!user) {
@@ -103,7 +113,7 @@ const deleteUser = async (req,res) => {
     res.send();
 }
 
-const searchUser = async (req,res) => {
+const searchUser = async (req, res) => {
     const user = await UserService.search(req.params.id);
 
     if (!user) {
