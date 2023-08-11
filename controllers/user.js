@@ -66,33 +66,32 @@ const createUser = async (req, res) => {
 }
 
 const updateUser = async (req, res) => {
-    console.log('1');
     if (!req.body.fname) {
         res.status(400).json({message:'The new fname to the user is required'});
     }
-    console.log('2');
+
     if (!req.body.lname) {
         res.status(400).json({message:'The new lname to the user is required'});
     }
-    console.log('3');
+
     if (!req.body.orders) {
         res.status(400).json({message:'The new order to the user is required'});
     }
-    console.log('4');
+
     if (!req.body.phoneNumber) {
         res.status(400).json({message:'The new phoneNumber to the user is required'});
     }
-    console.log('5');
+
     if (!req.body.password) {
         res.status(400).json({message:'The new password to the user is required'});
     }
-    console.log('6');
+
     if (!req.body.is_Manager) {
         res.status(400).json({message:'The new is_Manager to the user is required'});
     }
-    console.log('7');
+
     const newUser = {
-        id: req.body._id,
+        id: req.params.id,
         fname: req.body.fname,
         lname: req.body.lname,
         orders: req.body.orders,
@@ -100,16 +99,16 @@ const updateUser = async (req, res) => {
         password: req.body.password,
         is_Manager: req.body.is_Manager
     }
-    console.log('8');
+    
     if (req.body.currentOrder) {
         newUser.currentOrder = req.body.currentOrder;
     }
-    console.log('9');
+
     const user = await UserService.update(newUser);
     if (!user) {
         return res.status(404).json({errors:['User not found']});
     }
-    console.log('10');
+
     res.json(user);
 };
 

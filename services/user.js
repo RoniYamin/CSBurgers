@@ -40,12 +40,10 @@ const deleteUser = async (id) => {
 const updateUser = async (newUser) => {
     const user = await searchUser(newUser.id);
 
-    console.log('122');
     if (!user) {
         return null;
     }
 
-    console.log('123');
     user.fname = newUser.fname;
     user.lname = newUser.lname;
     user.orders = newUser.orders;
