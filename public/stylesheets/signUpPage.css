@@ -20,3 +20,8 @@
 {
     font-size: xx-large;
 }
+
+.name {
+    display: flex;
+    flex-direction: row-reverse;
+}

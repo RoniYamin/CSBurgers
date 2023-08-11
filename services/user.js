@@ -59,7 +59,7 @@ const updateUser = async (newUser) => {
     return user;
 }
 
-const searchInQuery = async (fname, lname, password) => {
+const searchForLogIn = async (fname, lname, password) => {
     if (!fname) {
         return null;
     }
@@ -75,11 +75,24 @@ const searchInQuery = async (fname, lname, password) => {
     return await User.find({fname, lname, password});
 }
 
+const searchForPassward = async (fname, lname) => {
+    if (!fname) {
+        return null;
+    }
+
+    if (!lname) {
+        return null;
+    }
+
+    return await User.find({fname, lname});
+}
+
 module.exports = {
     getAll,
     create: createUser,
     delete: deleteUser,
     update: updateUser,
     search: searchUser,
-    searchInQuery
+    searchForPassward,
+    searchForLogIn
 }

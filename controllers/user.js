@@ -3,15 +3,24 @@ const UserService = require('../services/user');
 const getAllUsers = async (req, res) => {
     try {
         let Users;
-
-        if (req.query.fname || req.query.lname || req.query.password){
+        
+        if (!req.query.flag){
             if (!req.query.fname || !req.query.lname || !req.query.password) {
                 throw new Error('You have not entered all the details');
             } else {
-                Users = await UserService.searchInQuery(req.query.fname, req.query.lname, req.query.password);
+                Users = await UserService.searchForLogIn(req.query.fname, req.query.lname, req.query.password);
             }
         } else {
-            Users = await UserService.getAll();
+            if (req.query.fname || req.query.lname)
+            {
+                if (!req.query.fname || !req.query.lname) {
+                    throw new Error('You have not entered all the details');
+                } else {
+                    Users = await UserService.searchForPassward(req.query.fname, req.query.lname);
+                }
+            } else {
+                Users = await UserService.getAll();
+            }
         }
         
         if(!Users) {
@@ -57,6 +66,7 @@ const createUser = async (req, res) => {
 }
 
 const updateUser = async (req, res) => {
+
     if (!req.body.fname) {
         res.status(400).json({message:'The new fname to the user is required'});
     }
@@ -82,6 +92,7 @@ const updateUser = async (req, res) => {
     }
 
     const newUser = {
+        id: req.body._id,
         fname: req.body.fname,
         lname: req.body.lname,
         orders: req.body.orders,
@@ -91,14 +102,13 @@ const updateUser = async (req, res) => {
     }
 
     if (req.body.currentOrder) {
-        tmp.currentOrder = req.body.currentOrder;
+        newUser.currentOrder = req.body.currentOrder;
     }
 
     const user = await UserService.update(newUser);
     if (!user) {
         return res.status(404).json({errors:['User not found']});
     }
-
     res.json(user);
 };
 

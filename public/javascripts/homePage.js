@@ -22,7 +22,8 @@ $(document).ready(function() {
                 data: {
                     fname: fnameVal,
                     lname: lnameVal,
-                    password: passwordVal
+                    password: passwordVal,
+                    flag: false
                 },
                 success: function(response) {
                     console.log("Data saved successfully:", response);
