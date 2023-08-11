@@ -11,24 +11,26 @@ $(document).ready(function() {
         const lnameVal = lnameTxt.val();
         const passwordVal = passwordTxt.val();
 
-        $.ajax({
-            url:"/api/user",
-            method: "GET",
-            dataType: "json",
-            contentType: 'application/json',
-            data: {
-                fname: fnameVal,
-                lname: lnameVal,
-                password: passwordVal
-            },
-            success: function(response) {
-                console.log("Data saved successfully:", response);
-            },
-            error: function(error) {
-                console.error("Error saving data:", error);
-            }
-        });
+        if (!fnameVal && !lnameVal && !passwordVal) {
+            return; 
+        } else {
+            $.ajax({
+                url:"/api/user",
+                method: "GET",
+                dataType: "json",
+                contentType: 'application/json',
+                data: {
+                    fname: fnameVal,
+                    lname: lnameVal,
+                    password: passwordVal
+                },
+                success: function(response) {
+                    console.log("Data saved successfully:", response);
+                },
+                error: function(error) {
+                    console.error("Error saving data:", error);
+                }
+            });
+        }
     });
-
-    
 });
