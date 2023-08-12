@@ -33,6 +33,31 @@ $(document).ready(function() {
             }
         });
 
+        if (!user) {
+
+            return;
+        }
+
+        if (passwordVal.length > 8) {
+            let counter = 0;
+
+            for (let i = 0; i < passwordVal.length; i++) {
+                if (passwordVal[i] <= 'z' && passwordVal[i] >= 'A') {
+                    counter++;
+                }
+            }
+
+            if (counter === 0) {
+                return;
+            }
+        } else {
+            return;
+        }
+
+        if (passwordApproveVal !== passwordVal) {
+            return;
+        }
+
         $.ajax({
             url:`/api/user/${user[0]._id}`,
             method: "PUT",
