@@ -15,4 +15,8 @@ router.get('/menu', function(req, res, next) {
   res.render("menuPage");
 });
 
+router.get('/branches/manger', function(req, res, next) {
+  res.render("branchesMangers");
+});
+
 module.exports = router;
