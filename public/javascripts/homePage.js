@@ -6,13 +6,17 @@ $(document).ready(function() {
         const fnameTxt = $('#fnameTxt');
         const lnameTxt = $('#lnameTxt');
         const passwordTxt = $('#passwordTxt');
+        const error = $('#error');
         
         const fnameVal = fnameTxt.val();
         const lnameVal = lnameTxt.val();
         const passwordVal = passwordTxt.val();
 
         if (!fnameVal && !lnameVal && !passwordVal) {
-            return; 
+            error.html('לא הזנת את כל כל הנתונים');
+            if (error.hasClass('hide')) {
+                error.removeClass('hide');
+            }
         } else {
             $.ajax({
                 url:"/api/user",
@@ -26,10 +30,16 @@ $(document).ready(function() {
                     flag: false
                 },
                 success: function(response) {
+                    if (!error.hasClass('hide')) {
+                        error.addClass('hide');
+                    }
                     console.log("Data saved successfully:", response);
                 },
                 error: function(error) {
-                    console.error("Error saving data:", error);
+                    error.html('יש לך טעות בשם או בסיסמה אנא תקן כדי להתחבר');
+                    if (error.hasClass('hide')) {
+                        error.removeClass('hide');
+                    }
                 }
             });
         }
