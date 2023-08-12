@@ -6,16 +6,16 @@ $(document).ready(function() {
         const fnameTxt = $('#fnameTxt');
         const lnameTxt = $('#lnameTxt');
         const passwordTxt = $('#passwordTxt');
-        const error = $('#error');
+        const Error = $('#error');
         
         const fnameVal = fnameTxt.val();
         const lnameVal = lnameTxt.val();
         const passwordVal = passwordTxt.val();
 
         if (!fnameVal && !lnameVal && !passwordVal) {
-            error.html('לא הזנת את כל כל הנתונים');
-            if (error.hasClass('hide')) {
-                error.removeClass('hide');
+            Error.html('לא הזנת את כל כל הנתונים');
+            if (Error.hasClass('hide')) {
+                Error.removeClass('hide');
             }
         } else {
             $.ajax({
@@ -26,19 +26,19 @@ $(document).ready(function() {
                 data: {
                     fname: fnameVal,
                     lname: lnameVal,
-                    password: passwordVal,
-                    flag: false
+                    password: passwordVal
                 },
                 success: function(response) {
-                    if (!error.hasClass('hide')) {
-                        error.addClass('hide');
+                    if (!Error.hasClass('hide')) {
+                        Error.addClass('hide');
                     }
                     console.log("Data saved successfully:", response);
                 },
                 error: function(error) {
-                    error.html('יש לך טעות בשם או בסיסמה אנא תקן כדי להתחבר');
-                    if (error.hasClass('hide')) {
-                        error.removeClass('hide');
+                    console.error("Error saving data:", error);
+                    Error.html('יש לך טעות בשם או בסיסמה אנא תקן כדי להתחבר');
+                    if (Error.hasClass('hide')) {
+                        Error.removeClass('hide');
                     }
                 }
             });

@@ -23,7 +23,7 @@ $(document).ready(function() {
             data: {
                 fname: fnameVal,
                 lname: lnameVal,
-                flag: true
+                phoneNumber: 1 // for now no phoneNumber
             },
             success: function(data) {
                 user = data;

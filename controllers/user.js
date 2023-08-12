@@ -2,18 +2,18 @@ const UserService = require('../services/user');
 
 const getAllUsers = async (req, res) => {
     try {
-        let Users;
+        let Users; 
         
-        if (!req.query.flag){
+        if (!req.query.phoneNumber){
             if (!req.query.fname || !req.query.lname || !req.query.password) {
                 throw new Error('You have not entered all the details');
             } else {
                 Users = await UserService.searchForLogIn(req.query.fname, req.query.lname, req.query.password);
             }
         } else {
-            if (req.query.fname || req.query.lname)
+            if (req.query.fname || req.query.lname || req.query.phoneNumber)
             {
-                if (!req.query.fname || !req.query.lname) {
+                if (!req.query.fname || !req.query.lname || !req.query.phoneNumber) {
                     throw new Error('You have not entered all the details');
                 } else {
                     Users = await UserService.searchForPassward(req.query.fname, req.query.lname);
@@ -23,7 +23,7 @@ const getAllUsers = async (req, res) => {
             }
         }
         
-        if(!Users) {
+        if(!Users || Users.length === 0) {
             throw new Error('Non existing users');
         }
 
