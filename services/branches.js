@@ -23,7 +23,7 @@ const searchBranch = async(id) => {
 }
 
 const deleteBranch = async (id) => {
-    const branch = await searchUser(id);
+    const branch = await searchBranch(id);
 
     if (!branch) {
         return null;

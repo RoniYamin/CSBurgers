@@ -1,31 +1,110 @@
 $(document).ready(function() {
 
+    const branchList =  $('.branches-list');
+
+    const appendBranchLi = (branch) => {
+        const newElement = $(`<li id="${branch._id}">
+        <div class="location-Section"> 
+            <div class="location">
+                <div class="location-icon">
+                    <i class="bi bi-geo-alt-fill"></i>
+                </div>
+
+                <span class="nameOfLocation">${branch.name}</span>
+            </div>
+
+            <div type="button" class="remove-icon" data-branch-id="${branch._id}">
+                <i class="bi bi-x-circle-fill" id="iconToRemove-${branch._id}"></i>
+            </div>
+
+            <div type="button" class="plus-icon" data-branch-id="${branch._id}">
+                <i class="bi bi-plus-circle-fill" id="iconToClick-${branch._id}"></i>
+            </div>
+            </div>
+        </li>`);
+
+        newElement.find('.remove-icon').on('click', function() {
+            const btn = $(this);
+            const id = btn.attr('data-branch-id');
+
+            $.ajax({
+                url: `/api/branches/${id}`,
+                method: "DELETE",
+                success: function() {
+                    $(`#${id}`).remove();
+                },
+                error: function(error) {
+                    console.error("Error deleting data:", error);
+                }
+            });
+        });
+
+        newElement.find('.plus-icon').on('click', function() {
+            const btn = $(this);
+            const id = btn.attr('data-branch-id');
+            const icon = $(`#iconToClick-${id}`);
+
+            if(icon.hasClass('bi bi-plus-circle-fill')) {
+                $.ajax({
+                    url: `/api/branches/${id}`,
+                    method: "GET"
+                }).done(function(data) {
+                    const li = $(`#${id}`);
+                    li.append(`<div class="location-data" id="location-data-${id}">
+                        <div id="map-${id}" style="width: 50%"></div>
+                        <div class="branch-data" style="width: 50%">
+                            <div class="data">כתובת: ${data.address}</div>
+                            <div class="data">משלוחים: כן</div>
+                            <div class="data">${data.phoneNumber} :טלפון</div>
+                            <div class="data">שעות פתיחה: ${data.activityTime}</div>
+                        </div>
+                    </div>`);
+    
+                    icon.removeClass("bi bi-plus-circle-fill").addClass("bi bi-dash-circle-fill");
+                    
+                    // Initialize and add the map
+                    let map;
+
+                    async function initMap() {
+                        // The location of Uluru
+                        const position = { lat: data.coordinateX, lng: data.coordinateY };
+                        // Request needed libraries.
+                        //@ts-ignore
+                        const { Map } = await google.maps.importLibrary("maps");
+                        const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+                         // The map, centered at Uluru
+                        map = new Map(document.getElementById(`map-${id}`), {
+                            zoom: 14,
+                            center: position,
+                            mapId: `CSBugerBranch-${id}`,
+                        });
+
+                        // The marker, positioned at Uluru
+                        const marker = new AdvancedMarkerElement({
+                            map: map,
+                            position: position,
+                            title: data.name,
+                        });
+                    }
+
+                    initMap();
+                });
+            }
+            else {
+                $(`#location-data-${id}`).remove();
+                icon.removeClass("bi bi-dash-circle-fill").addClass("bi bi-plus-circle-fill");
+            }
+        });
+
+        branchList.append(newElement);
+    }
+
     let Branches = [];
 
-    $.ajax({
-        url:"/api/branches",
-        method: "GET"
-    }).done(function(data) {
+    const render = (data) => {
         Branches = data.map(branch => {
-            $('.branches-list').append(`<li id="${branch._id}">
-                <div class="location-Section"> 
-                    <div class="location">
-                        <div class="location-icon">
-                            <i class="bi bi-geo-alt-fill"></i>
-                        </div>
-
-                        <span class="nameOfLocation">${branch.name}</span>
-                    </div>
-
-                    <div class="remove-icon" data-branch-id="${branch._id}">
-                        <i class="bi bi-x-circle-fill" id="iconToRemove-${branch._id}"></i>
-                    </div>
-
-                    <div class="plus-icon" data-branch-id="${branch._id}">
-                        <i class="bi bi-plus-circle-fill" id="iconToClick-${branch._id}"></i>
-                    </div>
-                </div>
-            </li>`);
+            appendBranchLi(branch);
             return {id: branch._id, name: branch.name, element: $(`#${branch._id}`)};
         });
 
@@ -88,8 +167,6 @@ $(document).ready(function() {
                         const managerId = selectedManager.attr('data-manager-id');
                         const phoneNumber = selectedManager.attr('data-phone-number');
                         
-                        let branch;
-                        
                         await $.ajax({
                             url: "/api/branches",
                             method: "POST",
@@ -104,106 +181,22 @@ $(document).ready(function() {
                                 coordinateX: x.val(),
                                 coordinateY: y.val()
                             }),
-                            success: function(data) {
-                                branch = data;
-                                console.log("Data saved successfully:", data);
+                            success: function(newData) {
+                                hide.removeClass('nohide').addClass('hide');
+                                nohide.removeClass('hide').addClass('nohide');
+
+                                data.push(newData);
+                                appendBranchLi(newData);
                             },
                             error: function(error) {
                                 console.error("Error saving data:", error);
                             }
                         });
-        
-                        $('.branches-list').append(`<li id="${branch._id}">
-                            <div class="location-Section"> 
-                                <div class="location">
-                                    <div class="location-icon">
-                                        <i class="bi bi-geo-alt-fill"></i>
-                                    </div>
-        
-                                    <span class="nameOfLocation">${branch.name}</span>
-                                </div>
-
-                                <div class="remove-icon" data-branch-id="${branch._id}">
-                                    <i class="bi bi-x-circle-fill" id="iconToRemove-${branch._id}"></i>
-                                </div>
-        
-                                <div class="plus-icon" data-branch-id="${branch._id}">
-                                    <i class="bi bi-plus-circle-fill" id="iconToClick-${branch._id}"></i>
-                                </div>
-                            </div>
-                        </li>`);
-
-                        Branches.push({id: branch._id, name: branch.name, element: $(`#${branch._id}`)});
-                        
-                        hide.removeClass('nohide').addClass('hide');
-                        nohide.removeClass('hide').addClass('nohide');
                     }
                 }
             });
         });
-
-        $('.plus-icon').on('click', function() {
-            const btn = $(this);
-            const id = btn.attr('data-branch-id');
-            const icon = $(`#iconToClick-${id}`);
-
-            if(icon.hasClass('bi bi-plus-circle-fill')) {
-                $.ajax({
-                    url: `/api/branches/${id}`,
-                    method: "GET"
-                }).done(function(data) {
-                    const li = $(`#${id}`);
-                    li.append(`<div class="location-data" id="location-data-${id}">
-                        <div id="map-${id}" style="width: 50%"></div>
-                        <div class="branch-data" style="width: 50%">
-                            <div class="data">כתובת: ${data.address}</div>
-                            <div class="data">משלוחים: כן</div>
-                            <div class="data">${data.phoneNumber} :טלפון</div>
-                            <div class="data">שעות פתיחה: ${data.activityTime}</div>
-                        </div>
-                    </div>`);
-    
-                    icon.removeClass("bi bi-plus-circle-fill").addClass("bi bi-dash-circle-fill");
-                    
-                    // Initialize and add the map
-                    let map;
-
-                    async function initMap() {
-                        // The location of Uluru
-                        const position = { lat: data.coordinateX, lng: data.coordinateY };
-                        // Request needed libraries.
-                        //@ts-ignore
-                        const { Map } = await google.maps.importLibrary("maps");
-                        const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-
-                         // The map, centered at Uluru
-                        map = new Map(document.getElementById(`map-${id}`), {
-                            zoom: 14,
-                            center: position,
-                            mapId: `CSBugerBranch-${id}`,
-                        });
-
-                        // The marker, positioned at Uluru
-                        const marker = new AdvancedMarkerElement({
-                            map: map,
-                            position: position,
-                            title: data.name,
-                        });
-                    }
-
-                    initMap();
-                });
-            }
-            else {
-                $(`#location-data-${id}`).remove();
-                icon.removeClass("bi bi-dash-circle-fill").addClass("bi bi-plus-circle-fill");
-            }
-        });
-
-        $('.remove-icon').on('click', function() {
-            
-        });
-
+        
         const searchTxt = $('#searchTxt');
 
         searchTxt.on('input', function() {
@@ -216,5 +209,16 @@ $(document).ready(function() {
                 branch.element.toggleClass("hide", !isVisible);
             });
         });
-    }); 
+    }   
+
+    $.ajax({
+        url:"/api/branches",
+        method: "GET",
+        success: (data) => {
+            render(data);
+        },
+        error: (error) => {
+            console.log(error);
+        }
+    });
 });
