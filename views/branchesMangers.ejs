@@ -40,8 +40,29 @@
     <main class="branches">
         <ol class="branches-list"></ol>
 
-        <div class="addNewBranch">
-            <i class="bi bi-plus-circle" id="addIcon"></i>
+        <div id="nohide" class="nohide">
+            <div id="addNewBranch">
+                <i class="bi bi-plus-circle" id="addIcon"></i>
+            </div>
+        </div>
+        
+        <div id="hide" class="hide">
+            <div id="info">
+                <div class="inputs">
+                    <input placeholder="שם הסניף" class="info-input" id="branchName">
+                    <input placeholder="כתובת" class="info-input" id="address">
+                    <input placeholder="שעות פעילות" class="info-input" id="Activity">
+                    <input placeholder="קורדינטה אנכית" type="number" class="info-input" id="x">
+                    <input placeholder="קורדינטה אופקית" class="info-input" id="y">
+                </div>
+                <div class="selection">
+                    <select id="managers" class="form-select form-select-lg"></select>
+                </div>
+                <div class="buttons">
+                    <button class="closeBtn">סגור</button>
+                    <button class="saveBtn">שמור</button>
+                </div>
+            </div>
         </div>
     </main>
     

@@ -44,10 +44,6 @@ li {
     flex-direction: column;
 }
 
-.hide {
-    display: none;
-}
-
 .location-Section {
     color: white;
     background-color: rgb(154, 13, 13);
@@ -95,7 +91,7 @@ li {
     margin-right: 0.5vw;
 }
 
-.addNewBranch {
+#addNewBranch {
     border: 2px dotted black;
     width: 55vw;
     height: 4vw;
@@ -111,6 +107,17 @@ li {
     font-size: 2vw;
 }
 
-.info {
+#info {
     display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+.hide {
+    display: none;
 }
