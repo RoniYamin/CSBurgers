@@ -15,12 +15,16 @@ router.get('/menu', function(req, res, next) {
   res.render("menuPage");
 });
 
+router.get('/branchesManger', function(req, res, next) {
+  res.render("branchesMangers"); 
+});
+
 router.get('/signUp', function(req, res, next) {
   res.render("signUp");
 });
 
 router.get('/aboutUs', function(req, res, next) {  
-  res.render("aboutUs");
+  res.render("aboutUs"); 
 });
 
 module.exports = router;

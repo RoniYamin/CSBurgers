@@ -22,7 +22,7 @@ const BranchesSchema = new mongoose.Schema({
         required: true
     }, 
 
-    manger: {
+    manager: {
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
@@ -32,7 +32,7 @@ const BranchesSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-
+    
     coordinateY:
     {
         type: Number,
