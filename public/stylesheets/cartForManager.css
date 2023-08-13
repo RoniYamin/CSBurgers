@@ -1,0 +1,37 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: right;
+}
+
+aside {
+    background-color: #f1f1f1;
+    width: 250px;
+    padding: 10px;
+    float: right;
+}
+
+section {
+    padding: 20px;
+    margin-left: 270px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+.hide {
+    display: none;
+}

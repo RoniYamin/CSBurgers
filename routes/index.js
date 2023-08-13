@@ -27,4 +27,8 @@ router.get('/aboutUs', function(req, res, next) {
   res.render("aboutUs"); 
 });
 
+router.get('/cartForManager', function(req, res, next) {
+  res.render("cartForManager");
+});
+
 module.exports = router;
