@@ -23,22 +23,27 @@ $(document).ready(function() {
             const btn = $(this);
             const id = btn.attr('data-user-id');
             const icon = $(`#iconToClick-${id}`);
+            const li = $(`#${id}`);
+
+            const appendUsersOrdersLi = (data) => { 
+                const newElement = $(`<div class="user-data-section" id="user-data-${id}">
+                    <div class="user-data">
+                        <div class="data">שם פרטי: ${data.fname}</div>
+                        <div class="data">שם משפחה: ${data.lname}</div>
+                        <div class="data">${data.phoneNumber} :טלפון</div>
+                        <div class="data-orders"></div>
+                    </div>
+                </div>`);
+
+                li.append(newElement);
+            }
 
             if(icon.hasClass('bi bi-chevron-down')) {
                 await $.ajax({
                     url: `/api/user/${id}`,
                     method: "GET"
                 }).done(function(data) {
-                    const li = $(`#${id}`);
-                    li.append(`<div class="user-data-section" id="user-data-${id}">
-                        <div class="user-data">
-                            <div class="data">שם פרטי: ${data.fname}</div>
-                            <div class="data">שם משפחה : ${data.lname}</div>
-                            <div class="data">${data.phoneNumber} :טלפון</div>
-                            <div class="data"></div>
-                        </div>
-                    </div>`);
-    
+                    appendUsersOrdersLi(data);
                     icon.removeClass("bi bi-chevron-down").addClass("bi bi-chevron-up");
                 });
             }
@@ -102,13 +107,13 @@ $(document).ready(function() {
     usersBtn.on('click', function() {
         if (usersData.hasClass('hide')) {
             usersData.removeClass('hide').addClass('nohide');
-            ordersBtn.removeClass('nohide').addClass('hide');
+            ordersData.removeClass('nohide').addClass('hide');
         }
     });
 
     ordersBtn.on('click', function() {
-        if (ordersBtn.hasClass('hide')) {
-            ordersBtn.removeClass('hide').addClass('nohide');
+        if (ordersData.hasClass('hide')) {
+            ordersData.removeClass('hide').addClass('nohide');
             usersData.removeClass('nohide').addClass('hide');
         }
     });
