@@ -2,7 +2,14 @@ const UserService = require('../services/user');
 
 const getAllUsers = async (req,res) => {
     try {
-        const Users = await UserService.getAll();
+
+        let Users;
+
+        if (req.query.is_Manager) {
+            Users = await UserService.getAllManagers(req.query.is_Manager);
+        } else {
+            Users = await UserService.getAll();
+        }
         
         if(!Users) {
             throw new Error('Non existing users');

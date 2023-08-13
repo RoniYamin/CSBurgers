@@ -30,7 +30,8 @@
 
 .branches {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .branches-list {
@@ -92,4 +93,24 @@ li {
 
 .data {
     margin-right: 0.5vw;
+}
+
+.addNewBranch {
+    border: 2px dotted black;
+    width: 55vw;
+    height: 4vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-items: center;
+    margin-bottom: 1vw;
+}
+
+#addIcon {
+    color: green;
+    font-size: 2vw;
+}
+
+.info {
+    display: flex;
 }
