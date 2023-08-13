@@ -17,6 +17,10 @@ $(document).ready(function() {
                         <span class="nameOfLocation">${branch.name}</span>
                     </div>
 
+                    <div class="remove-icon" data-branch-id="${branch._id}">
+                        <i class="bi bi-x-circle-fill" id="iconToRemove-${branch._id}"></i>
+                    </div>
+
                     <div class="plus-icon" data-branch-id="${branch._id}">
                         <i class="bi bi-plus-circle-fill" id="iconToClick-${branch._id}"></i>
                     </div>
@@ -118,12 +122,18 @@ $(document).ready(function() {
         
                                     <span class="nameOfLocation">${branch.name}</span>
                                 </div>
+
+                                <div class="remove-icon" data-branch-id="${branch._id}">
+                                    <i class="bi bi-x-circle-fill" id="iconToRemove-${branch._id}"></i>
+                                </div>
         
                                 <div class="plus-icon" data-branch-id="${branch._id}">
                                     <i class="bi bi-plus-circle-fill" id="iconToClick-${branch._id}"></i>
                                 </div>
                             </div>
                         </li>`);
+
+                        Branches.push({id: branch._id, name: branch.name, element: $(`#${branch._id}`)});
                         
                         hide.removeClass('nohide').addClass('hide');
                         nohide.removeClass('hide').addClass('nohide');
@@ -188,6 +198,10 @@ $(document).ready(function() {
                 $(`#location-data-${id}`).remove();
                 icon.removeClass("bi bi-dash-circle-fill").addClass("bi bi-plus-circle-fill");
             }
+        });
+
+        $('.remove-icon').on('click', function() {
+            
         });
 
         const searchTxt = $('#searchTxt');
