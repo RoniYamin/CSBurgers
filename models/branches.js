@@ -21,7 +21,7 @@ const BranchesSchema = new mongoose.Schema({
         required: true
     }, 
 
-    manger: {
+    manager: {
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },

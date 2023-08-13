@@ -26,7 +26,7 @@ const createBranch = async (req,res) => {
             address: req.body.address,
             phoneNumber: req.body.phoneNumber,
             activityTime: req.body.activityTime,
-            manger: req.body.manger,
+            manager: req.body.manager,
             coordinateX: req.body.coordinateX,
             coordinateY: req.body.coordinateY
         }

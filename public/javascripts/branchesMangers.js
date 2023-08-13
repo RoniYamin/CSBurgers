@@ -115,11 +115,13 @@ $(document).ready(function() {
                                     <div class="location-icon">
                                         <i class="bi bi-geo-alt-fill"></i>
                                     </div>
-                                <span class="nameOfLocation">${branch.name}</span>
-                            </div>
-                            <div class="plus-icon" data-branch-id="${branch._id}">
+        
+                                    <span class="nameOfLocation">${branch.name}</span>
+                                </div>
+        
+                                <div class="plus-icon" data-branch-id="${branch._id}">
                                     <i class="bi bi-plus-circle-fill" id="iconToClick-${branch._id}"></i>
-                            </div>
+                                </div>
                             </div>
                         </li>`);
                         

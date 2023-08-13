@@ -10,7 +10,7 @@ const createBranch = async (newBranch) => {
         address: newBranch.address,
         phoneNumber: newBranch.phoneNumber,
         activityTime: newBranch.activityTime,
-        manger: newBranch.manger,
+        manager: newBranch.manager,
         coordinateX: newBranch.coordinateX,
         coordinateY: newBranch.coordinateY
     });
