@@ -1,3 +1,4 @@
+const { Double } = require('bson');
 const mongoose = require('mongoose');
 
 const BranchesSchema = new mongoose.Schema({
@@ -28,13 +29,13 @@ const BranchesSchema = new mongoose.Schema({
 
     coordinateX:
     {
-        type:Number,
+        type: Number,
         required: true
     },
     
     coordinateY:
     {
-        type:Number,
+        type: Number,
         required: true
     }
 });

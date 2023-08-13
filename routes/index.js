@@ -16,7 +16,15 @@ router.get('/menu', function(req, res, next) {
 });
 
 router.get('/branchesManger', function(req, res, next) {
-  res.render("branchesMangers");
+  res.render("branchesMangers"); 
+});
+
+router.get('/signUp', function(req, res, next) {
+  res.render("signUp");
+});
+
+router.get('/aboutUs', function(req, res, next) {  
+  res.render("aboutUs"); 
 });
 
 module.exports = router;

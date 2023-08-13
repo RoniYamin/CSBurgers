@@ -93,3 +93,14 @@ li {
 .data {
     margin-right: 0.5vw;
 }
+
+.branch-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 50%;
+}
+
+.map {
+    width: 50%
+}   

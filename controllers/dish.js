@@ -1,6 +1,6 @@
 const DishService = require('../services/dish');
 
-const getAllDishes = async (req,res) => {
+const getAllDishes = async (req, res) => {
     try {
         const dishes = await DishService.getAll();
 
@@ -19,9 +19,9 @@ const getAllDishes = async (req,res) => {
     }
 }
 
-const createDish = async (req,res) => {
+const createDish = async (req, res) => {
     try {
-        const newDish = await DishService.create(req.body.name, req.body.price, req.body.CategoryId);
+        const newDish = await DishService.create(req.body.name, req.body.price, req.body.CategoryId, req.body.picture);
         res.json(newDish);
     }
     
@@ -33,7 +33,7 @@ const createDish = async (req,res) => {
     }
 }
 
-const updateDish = async (req,res) => {
+const updateDish = async (req, res) => {
     if (!req.body.name) {
         res.status(400).json({message:'The new name to the dish is required'});
     }
@@ -45,12 +45,16 @@ const updateDish = async (req,res) => {
     if (!req.body.CategoryId) {
         res.status(400).json({message:'The new CategoryId to the dish is required'});
     }
+    if (!req.body.picture) {
+        res.status(400).json({message:'The new picture to the dish is required'});
+    }
 
     const newDish = {
-        id: req.body.id,
+        id: req.params.id,
         name: req.body.name,
         price: req.body.price,
-        CategoryId: req.body.CategoryId
+        CategoryId: req.body.CategoryId,
+        picture: req.body.picture
     }
 
     const dish = await DishService.update(newDish);
@@ -62,7 +66,7 @@ const updateDish = async (req,res) => {
 };
 
 
-const deleteDish = async (req,res) => {
+const deleteDish = async (req, res) => {
     const dish = await DishService.delete(req.params.id);
     
     if (!dish) {
@@ -72,7 +76,7 @@ const deleteDish = async (req,res) => {
     res.send();
 }
 
-const searchDish = async (req,res) => {
+const searchDish = async (req, res) => {
     const dish = await DishService.search(req.params.id);
     
     if (!dish) {

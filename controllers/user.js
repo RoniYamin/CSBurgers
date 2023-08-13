@@ -79,6 +79,7 @@ const updateUser = async (req,res) => {
     }
 
     const newUser = {
+        id: req.params.id,
         fname: req.body.fname,
         lname: req.body.lname,
         orders: req.body.orders,

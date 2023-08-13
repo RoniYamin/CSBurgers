@@ -37,8 +37,8 @@ $(document).ready(function() {
                 }).done(function(data) {
                     const li = $(`#${id}`);
                     li.append(`<div class="location-data" id="location-data-${id}">
-                        <div id="map-${id}" style="width: 50%"></div>
-                        <div class="branch-data" style="width: 50%">
+                        <div id="map-${id}" class="map"></div>
+                        <div class="branch-data">
                             <div class="data">כתובת: ${data.address}</div>
                             <div class="data">משלוחים: כן</div>
                             <div class="data">${data.phoneNumber} :טלפון</div>
