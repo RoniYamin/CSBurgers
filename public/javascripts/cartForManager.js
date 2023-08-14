@@ -38,7 +38,7 @@ $(document).ready(function() {
                     </div>
                 </div>`);
 
-                const userOrdersList = $('.data-orders-list');
+                const userOrdersList = newElement.find('.data-orders-list');
 
                 const appendsOrderssLi = async (id) => {
                     let order;
@@ -104,6 +104,44 @@ $(document).ready(function() {
             </div>
         </div>
         </li>`);
+
+        newElement.find('.orderInfoButton').on('click', async function() {
+            const btn = $(this);
+            const id = btn.attr('data-order-id');
+            const icon = $(`#iconToClick-${id}`);
+            const li = $(`#${id}`);
+
+            const appendOrdersDataLi = (data) => { 
+                const newElement = $(`<div class="order-data-section" id="order-data-${id}">
+                    <div class="order-data">
+                        <div class="data">שם הלקוח: </div>
+                        <div class="data">תאריך: ${data.orderDate}</div>
+                        <div class="data">כתובת: ${data.location}</div>
+                        <div class="data">מחיר: ${data.totalprice}</div>
+                        <div class="data-orders-dishes">
+                            פרטים: 
+                            <ul class="data-orders-dishes-list"></ul>
+                        </div>
+                    </div>
+                </div>`);
+
+                li.append(newElement);
+            }
+
+            if(icon.hasClass('bi bi-chevron-down')) {
+                await $.ajax({
+                    url: `/api/order/${id}`,
+                    method: "GET"
+                }).done(function(data) {
+                    appendOrdersDataLi(data);
+                    icon.removeClass("bi bi-chevron-down").addClass("bi bi-chevron-up");
+                });
+            }
+            else {
+                $(`#order-data-${id}`).remove();
+                icon.removeClass("bi bi-chevron-up").addClass("bi bi-chevron-down");
+            }
+        });
 
         ordersList.append(newElement);
     }
