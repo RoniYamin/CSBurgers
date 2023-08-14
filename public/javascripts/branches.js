@@ -7,7 +7,7 @@ $(document).ready(function() {
         method: "GET"
     }).done(function(data) {
         Branches = data.map(branch => {
-            $('.branches-list').append(`<li id="${branch._id}">
+            $('.branches-list').append(`<li  id="${branch._id}">
                 <div class="location-Section"> 
                     <div class="location">
                         <div class="location-icon">
@@ -42,7 +42,7 @@ $(document).ready(function() {
                             <div class="data">כתובת: ${data.address}</div>
                             <div class="data">משלוחים: כן</div>
                             <div class="data">${data.phoneNumber} :טלפון</div>
-                            <div class="data">שעות פתיחה: ${data.activityTime}</div>
+                            <div class="data">שעות פתיחה<div class="inner-data-activity">${data.activityTime}</div></div>
                         </div>
                     </div>`);
     
