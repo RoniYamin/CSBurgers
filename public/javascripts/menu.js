@@ -1,5 +1,7 @@
-$(document).ready(function() {
+$(document).ready(async function() {
 
+    const dishesList = $('.dishes-list');
+    const mealsList = $('.meals-list');
     const categories = $('.categories');
 
     const appendCategoryLi = (category) => {
@@ -11,7 +13,7 @@ $(document).ready(function() {
             const btn = $(this);
             const id = btn.attr('data-branch-id');
 
-            
+
         });
 
         categories.append(newElement);

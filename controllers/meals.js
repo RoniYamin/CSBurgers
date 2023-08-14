@@ -5,9 +5,9 @@ const getAllMeals = async (req,res) => {
         let meals;
 
         if (req.query.CategoryId) {
-            meals = await DishService.getByCategory();
+            meals = await MealService.getByCategory();
         } else {
-            meals = await DishService.getAll();
+            meals = await MealService.getAll();
         }
 
         res.json(meals);
