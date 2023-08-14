@@ -23,12 +23,16 @@ router.get('/signUp', function(req, res, next) {
   res.render("signUp");
 });
 
+router.get('/delivery', function(req, res, next) {
+  res.render("delivery");
+});
+
 router.get('/contactUs', function(req, res, next) {
   res.render("contactUs");
 });
 
 router.get('/aboutUs', function(req, res, next) {  
-  res.render("aboutUs"); 
+  res.render("aboutUs");
 });
 
 module.exports = router;
