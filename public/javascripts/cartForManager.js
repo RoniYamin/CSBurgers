@@ -31,9 +31,41 @@ $(document).ready(function() {
                         <div class="data">שם פרטי: ${data.fname}</div>
                         <div class="data">שם משפחה: ${data.lname}</div>
                         <div class="data">${data.phoneNumber} :טלפון</div>
-                        <div class="data-orders"></div>
+                        <div class="data-orders">
+                            הזמנות: 
+                            <ul class="data-orders-list"></ul>
+                        </div>
                     </div>
                 </div>`);
+
+                const userOrdersList = $('.data-orders-list');
+
+                const appendsOrderssLi = async (id) => {
+                    let order;
+    
+                    await $.ajax({
+                        url: `/api/order/${id}`,
+                        method: "GET"
+                    }).done(function(data) {
+                        order = data;
+                    });
+    
+                    const newElement = $(`<li id="${order._id}">
+                        <div class="order-Section"> 
+                            <span class="numberOfOrder">${order.orderNumber}</span>
+    
+                            <div type="button" class="orderInfoButton" data-order-id="${order._id}">
+                                <i class="bi bi-chevron-down" id="iconToClick-${order._id}"></i>
+                            </div>
+                        </div>
+                    </li>`);
+    
+                    userOrdersList.append(newElement);
+                }
+
+                data.orders.forEach(order_id => {
+                    appendsOrderssLi(order_id);
+                });
 
                 li.append(newElement);
             }
