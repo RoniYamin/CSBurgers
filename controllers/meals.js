@@ -2,10 +2,12 @@ const MealService = require('../services/meals');
 
 const getAllMeals = async (req,res) => {
     try {
-        const meals = await MealService.getAll();
+        let meals;
 
-        if(!meals) {
-            throw new Error('Non existing meals');
+        if (req.query.CategoryId) {
+            meals = await DishService.getByCategory();
+        } else {
+            meals = await DishService.getAll();
         }
 
         res.json(meals);

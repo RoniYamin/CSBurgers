@@ -2,9 +2,15 @@ const DishService = require('../services/dish');
 
 const getAllDishes = async (req,res) => {
     try {
-        const dishes = await DishService.getAll();
+        let dishes;
 
-        if(!dishes) {
+        if (req.query.CategoryId) {
+            dishes = await DishService.getByCategory();
+        } else {
+            dishes = await DishService.getAll();
+        }
+
+        if (!dishes) {
             throw new Error('Non existing dishes');
         }
 

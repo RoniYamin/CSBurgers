@@ -47,10 +47,15 @@ const updateDish = async (newDish) => {
     return dish;
 }
 
+const getByCategory = async (CategoryId) => {
+    return await Dish.find({CategoryId});
+}
+
 module.exports = {
     getAll,
     create: createDish,
     delete: deleteDish,
     update: updateDish,
-    search: searchDish
+    search: searchDish,
+    getByCategory
 }
