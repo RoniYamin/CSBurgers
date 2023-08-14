@@ -16,8 +16,7 @@
     transition: all 0.4s;
     border: none;
     background: transparent;
-    color: rgb(154, 13, 13);
-
+    color: rgb(154, 13, 13);;
     text-align: center;
     font-size: 1.3vw;
     margin-top: 1.5vw;
@@ -26,6 +25,11 @@
 
     font-family: 'Lato', sans-serif;
     font-family: 'Noto Sans Hebrew', sans-serif;
+}
+
+.btn-css{
+    color: rgb(154, 13, 13);
+    text-decoration: none;
 }
 
 /* the button's placing */
