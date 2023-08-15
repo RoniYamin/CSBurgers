@@ -25,6 +25,7 @@ router.get('/signUp', function(req, res, next) {
 
 router.get('/contactUs', function(req, res, next) {
   res.render("contactUs");
+});
   
 router.get('/aboutUs', function(req, res, next) {  
   res.render("aboutUs"); 
